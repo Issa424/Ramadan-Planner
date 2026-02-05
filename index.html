@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ramadan Planner</title>
+<title>Ramadan Multi-Page Planner</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,34 +13,50 @@
     <button id="darkToggle">🌙</button>
 </header>
 
-<section class="dashboard">
-    <div class="stat-card">
-        <h3>📊 التقدم العام</h3>
-        <div class="progress">
-            <div id="totalProgress"></div>
-        </div>
-    </div>
-    <div class="stat-card">
-        <h3>🕌 الصلاة</h3>
-        <div class="progress">
-            <div id="prayerProgress"></div>
-        </div>
-    </div>
-    <div class="stat-card">
-        <h3>📖 القرآن</h3>
-        <div class="progress">
-            <div id="quranProgress"></div>
-        </div>
-    </div>
-    <div class="stat-card">
-        <h3>📿 الذكر</h3>
-        <div class="progress">
-            <div id="dhikrProgress"></div>
-        </div>
-    </div>
-</section>
+<nav>
+    <button class="tabBtn" data-tab="dashboard">🏠 Dashboard</button>
+    <button class="tabBtn" data-tab="days">📅 الأيام</button>
+    <button class="tabBtn" data-tab="stats">📊 الإحصائيات</button>
+    <button class="tabBtn" data-tab="notes">📝 الملاحظات</button>
+</nav>
 
-<section id="daysContainer" class="grid"></section>
+<main>
+    <!-- الصفحات -->
+    <section id="dashboard" class="tabContent active">
+        <h2>لوحة التحكم الرئيسية</h2>
+        <div class="stat-card">
+            <h3>📊 التقدم العام</h3>
+            <div class="progress"><div id="totalProgress"></div></div>
+        </div>
+        <div class="stat-card">
+            <h3>🕌 الصلاة</h3>
+            <div class="progress"><div id="prayerProgress"></div></div>
+        </div>
+        <div class="stat-card">
+            <h3>📖 القرآن</h3>
+            <div class="progress"><div id="quranProgress"></div></div>
+        </div>
+        <div class="stat-card">
+            <h3>📿 الذكر</h3>
+            <div class="progress"><div id="dhikrProgress"></div></div>
+        </div>
+    </section>
+
+    <section id="days" class="tabContent">
+        <h2>جدول الأيام</h2>
+        <div id="daysContainer" class="grid"></div>
+    </section>
+
+    <section id="stats" class="tabContent">
+        <h2>الإحصائيات المتقدمة</h2>
+        <div id="statsContent"></div>
+    </section>
+
+    <section id="notes" class="tabContent">
+        <h2>ملاحظاتك اليومية</h2>
+        <div id="notesContent"></div>
+    </section>
+</main>
 
 <!-- Modal للملاحظات -->
 <div id="noteModal" class="modal">
