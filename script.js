@@ -10,6 +10,9 @@ const noteText = document.getElementById("noteText");
 const saveNoteBtn = document.getElementById("saveNote");
 const closeModal = document.querySelector(".close");
 
+const tabs = document.querySelectorAll(".tabBtn");
+const tabContents = document.querySelectorAll(".tabContent");
+
 const tasks = [
     {id:"prayer", name:"🕌 الصلاة"},
     {id:"quran", name:"📖 القرآن"},
@@ -18,11 +21,24 @@ const tasks = [
     {id:"charity", name:"💰 الصدقة"},
 ];
 
-let data = JSON.parse(localStorage.getItem("ramadanUX")) || {};
+let data = JSON.parse(localStorage.getItem("ramadanMulti")) || {};
 let currentNoteDay = null;
 
 // الوضع الليلي
 darkToggle.onclick = () => document.body.classList.toggle("dark");
+
+// نظام التبويبات
+tabs.forEach(tab=>{
+    tab.addEventListener("click",()=>{
+        tabs.forEach(t=>t.classList.remove("active"));
+        tab.classList.add("active");
+        const target = tab.dataset.tab;
+        tabContents.forEach(tc=>{
+            tc.classList.remove("active");
+            if(tc.id===target) tc.classList.add("active");
+        });
+    });
+});
 
 // إنشاء أيام رمضان
 for(let d=1; d<=30; d++){
@@ -63,8 +79,9 @@ document.querySelectorAll(".noteBtn").forEach(btn=>{
 saveNoteBtn.onclick = ()=>{
     data[currentNoteDay] = data[currentNoteDay] || {};
     data[currentNoteDay].note = noteText.value;
-    localStorage.setItem("ramadanUX",JSON.stringify(data));
+    localStorage.setItem("ramadanMulti",JSON.stringify(data));
     noteModal.style.display="none";
+    renderNotes();
 };
 
 // اغلاق المودال
@@ -77,8 +94,9 @@ function saveData(){
         data[day]=data[day]||{};
         data[day][task]=el.checked;
     });
-    localStorage.setItem("ramadanUX",JSON.stringify(data));
+    localStorage.setItem("ramadanMulti",JSON.stringify(data));
     calcProgress();
+    renderNotes();
 }
 
 // حساب التقدم
@@ -101,4 +119,19 @@ function calcProgress(){
     dhikrProgress.style.width = Math.round(dhikrDone/30*100)+"%";
 }
 
+// عرض الملاحظات في صفحة الملاحظات
+function renderNotes(){
+    const notesContainer = document.getElementById("notesContent");
+    notesContainer.innerHTML = "";
+    for(let d=1; d<=30; d++){
+        if(data[d]?.note){
+            const div = document.createElement("div");
+            div.className="day-card";
+            div.innerHTML = `<h3>اليوم ${d}</h3><p>${data[d].note}</p>`;
+            notesContainer.appendChild(div);
+        }
+    }
+}
+
 calcProgress();
+renderNotes();
