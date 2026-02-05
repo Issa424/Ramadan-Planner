@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ramadan Planner</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>🌙 Ramadan Planner</h1>
+    <button id="darkToggle">🌙</button>
+</header>
+
+<section class="dashboard">
+    <div class="stat-card">
+        <h3>📊 التقدم العام</h3>
+        <div class="progress">
+            <div id="totalProgress"></div>
+        </div>
+    </div>
+    <div class="stat-card">
+        <h3>🕌 الصلاة</h3>
+        <div class="progress">
+            <div id="prayerProgress"></div>
+        </div>
+    </div>
+    <div class="stat-card">
+        <h3>📖 القرآن</h3>
+        <div class="progress">
+            <div id="quranProgress"></div>
+        </div>
+    </div>
+    <div class="stat-card">
+        <h3>📿 الذكر</h3>
+        <div class="progress">
+            <div id="dhikrProgress"></div>
+        </div>
+    </div>
+</section>
+
+<section id="daysContainer" class="grid"></section>
+
+<!-- Modal للملاحظات -->
+<div id="noteModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h3>📝 ملاحظات اليوم</h3>
+        <textarea id="noteText" placeholder="اكتب ملاحظاتك هنا..."></textarea>
+        <button id="saveNote">💾 حفظ الملاحظة</button>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
